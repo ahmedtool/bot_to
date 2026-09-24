@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وصلة — مدونة تطبيقات التوصيل</title>
+  <meta name="description" content="وصلة: مدونة عربية متخصصة في تطبيقات التوصيل — نصائح للتوفير، أدلة للمناديب وأصحاب المطاعم، وأدوات تفاعلية." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+  <div id="header"></div>
+
+  <main id="main">
+    <!-- الهيرو: المدونة كأنها طلب توصيل -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="chip">🔥 طلبك من المعرفة جاهز</span>
+          <h1 style="margin-top:14px">كل ما يخص <span class="hl">تطبيقات التوصيل</span>، يوصلك طازج.</h1>
+          <p class="lead">وصلة مدونة مصممة كأنها تطبيق توصيل: المقالات «طلبات»، والتصنيفات «منيو»، وتقدّم قراءتك يتتبعه مندوب حتى يوصل للنهاية. نكتب للعميل والمندوب وصاحب المطعم.</p>
+          <div class="hero-cta">
+            <a href="#menu" class="btn btn-primary">🍽️ تصفّح المنيو</a>
+            <a href="#tools" class="btn btn-ghost">🧮 احسب كم تصرف</a>
+          </div>
+          <div class="hero-stats">
+            <div><b id="statPosts">٠</b><span>طلب (مقال)</span></div>
+            <div><b id="statCats">٠</b><span>أقسام في المنيو</span></div>
+            <div><b id="statApps">٠</b><span>تطبيق في الدليل</span></div>
+          </div>
+        </div>
+
+        <div class="track-card" aria-hidden="true">
+          <div class="float-note a">⭐ <span>المقال وصل ساخن!</span></div>
+          <div class="track-head">
+            <div>
+              <b>طلبك في الطريق</b>
+              <div class="order-no">طلب رقم #٢٠٢٦ · مقال جديد</div>
+            </div>
+            <span class="chip mint">٧ دقائق</span>
+          </div>
+          <div class="map">
+            <svg class="route" viewBox="0 0 380 210" preserveAspectRatio="none">
+              <path class="route-path" d="M 330 50 C 250 40, 240 120, 170 110 S 70 150, 50 170" />
+            </svg>
+            <div class="pin start">🏪</div>
+            <div class="pin end">🏠</div>
+            <div class="rider">🛵</div>
+          </div>
+          <div class="steps">
+            <div class="step done"><i></i>استلمنا الفكرة</div>
+            <div class="step done"><i></i>التحرير</div>
+            <div class="step now"><i></i>في الطريق</div>
+            <div class="step"><i></i>وصل</div>
+          </div>
+          <div class="float-note b">🧾 <span>بدون رسوم خدمة</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="نصائح سريعة"><div class="ticker-track" id="ticker"></div></div>
+
+    <!-- المقالات -->
+    <section id="menu">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">🍽️ المنيو</div>
+            <h2>وش تبغى تقرأ اليوم؟</h2>
+          </div>
+          <label class="search-box">
+            🔎 <input id="search" type="search" placeholder="ابحث في الطلبات…" aria-label="ابحث في المقالات" />
+          </label>
+        </div>
+        <div class="menu-tabs" id="menuTabs" role="tablist"></div>
+        <div class="posts" id="posts"></div>
+      </div>
+    </section>
+
+    <!-- الأدوات -->
+    <section id="tools" style="background:var(--bg-soft)">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">🧰 أدوات وصلة</div>
+            <h2>لا تقرأ بس… احسبها</h2>
+          </div>
+          <p>أدوات تفاعلية تشتغل مباشرة في المتصفح.</p>
+        </div>
+        <div class="tools">
+          <div class="tool">
+            <h3>🧮 حاسبة التوفير</h3>
+            <p>كم تصرف على الرسوم؟ وهل الاشتراك الشهري يستاهل؟</p>
+            <div class="field">
+              <label for="cOrders">عدد طلباتك في الشهر <output for="cOrders"></output></label>
+              <input type="range" id="cOrders" min="1" max="40" value="8" />
+            </div>
+            <div class="field">
+              <label for="cFee">متوسط رسوم التوصيل <output for="cFee"></output></label>
+              <input type="range" id="cFee" min="0" max="30" value="12" />
+            </div>
+            <div class="field">
+              <label for="cService">متوسط رسوم الخدمة <output for="cService"></output></label>
+              <input type="range" id="cService" min="0" max="15" value="3" />
+            </div>
+            <div class="field">
+              <label for="cSub">سعر الاشتراك الشهري <output for="cSub"></output></label>
+              <input type="range" id="cSub" min="0" max="60" value="25" />
+            </div>
+            <div class="result-box">
+              <div><span>رسوم شهرية</span><b id="rMonthly"></b></div>
+              <div><span>رسوم سنوية</span><b id="rYearly"></b></div>
+              <div class="save"><span>توفير الاشتراك شهريًا</span><b id="rSave"></b></div>
+              <div><span>نقطة التعادل</span><b id="rBreak"></b></div>
+            </div>
+            <div class="tip" id="calcTip"></div>
+          </div>
+
+          <div class="tool">
+            <h3>🎯 أي نوع تطبيق يناسبك؟</h3>
+            <p>أربعة أسئلة سريعة، ونقول لك وش تركّز عليه.</p>
+            <div id="quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- دليل التطبيقات -->
+    <section>
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">📱 دليل التطبيقات</div>
+            <h2>تعرّف على اللاعبين</h2>
+          </div>
+          <a href="apps.html" class="btn btn-ghost">الدليل كامل ←</a>
+        </div>
+        <div class="apps" id="appsPreview"></div>
+      </div>
+    </section>
+
+    <!-- النشرة -->
+    <section>
+      <div class="container">
+        <div class="newsletter">
+          <div>
+            <h2>اشترك في «الشحنة الأسبوعية» 📦</h2>
+            <p>كل أحد: مقال جديد، أفضل نصيحة توفير، وخبر من عالم التوصيل. بدون رسوم توصيل 😉</p>
+          </div>
+          <div>
+            <form class="nl-form" id="nlForm" novalidate>
+              <input id="nlEmail" type="email" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" />
+              <button class="btn btn-primary" type="submit">اشترك</button>
+            </form>
+            <div class="nl-msg" id="nlMsg" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

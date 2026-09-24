@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مقال — وصلة</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="article">
+  <div id="header"></div>
+
+  <!-- متتبع القراءة على شكل تتبع طلب -->
+  <div class="tracker" aria-hidden="true">
+    <div class="container tracker-inner">
+      <div class="tracker-status"><span class="dot"></span><span id="trackText">جاري تجهيز طلبك</span></div>
+      <div class="tracker-bar"><div class="fill" id="trackFill"></div><span class="scooter" id="trackScooter">🛵</span></div>
+      <span>🏠</span>
+    </div>
+  </div>
+
+  <main id="main">
+    <article class="container">
+      <header class="article-hero" id="articleHero"></header>
+      <div class="article-layout">
+        <div>
+          <div class="prose" id="articleBody"></div>
+
+          <div class="delivered" id="delivered">
+            <div style="font-size:2.5rem">🎉</div>
+            <h3>تم توصيل المقال بنجاح!</h3>
+            <p>شكرًا لأنك قرأت للنهاية.</p>
+          </div>
+
+          <div class="rate">
+            <h3>قيّم الطلب</h3>
+            <p style="color:var(--muted)">وصلك المقال ساخن ولا بارد؟</p>
+            <div class="stars" id="stars"></div>
+            <p id="rateMsg" style="margin-top:10px;min-height:1.6em;font-weight:700"></p>
+          </div>
+        </div>
+        <aside class="toc">
+          <h4>🧾 محتويات الطلب</h4>
+          <ol id="toc"></ol>
+        </aside>
+      </div>
+    </article>
+
+    <section>
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">🍟 أطلب معه</div>
+            <h2>مقالات ممكن تعجبك</h2>
+          </div>
+        </div>
+        <div class="posts" id="related"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/article.js"></script>
+</body>
+</html>
