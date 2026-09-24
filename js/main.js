@@ -22,8 +22,8 @@ function renderChrome() {
   <header class="site-header">
     <div class="container nav">
       <a href="index.html" class="logo" aria-label="وصلة - الرئيسية">
-        <span class="logo-mark">🛵</span>
-        <span>وصلة<small>مدونة تطبيقات التوصيل</small></span>
+        <span class="logo-mark">و</span>
+        <span>وصلة</span>
       </a>
       <nav class="nav-links" id="navLinks">
         ${link("index.html", "الرئيسية", "home")}
@@ -44,12 +44,12 @@ function renderChrome() {
     <div class="container">
       <div class="foot-grid">
         <div>
-          <a href="index.html" class="logo"><span class="logo-mark">🛵</span><span>وصلة</span></a>
+          <a href="index.html" class="logo"><span class="logo-mark">و</span><span>وصلة</span></a>
           <p style="margin-top:12px;max-width:380px">مدونة مستقلة عن عالم تطبيقات التوصيل: نكتب للعميل الذي يريد أن يوفّر، وللمندوب الذي يريد أن يكسب، ولصاحب المطعم الذي يريد أن ينمو.</p>
         </div>
         <div>
           <h5>المنيو</h5>
-          <ul>${CATEGORIES.filter((c) => c.id !== "all").map((c) => `<li><a href="index.html?cat=${c.id}#menu">${c.icon} ${c.name}</a></li>`).join("")}</ul>
+          <ul>${CATEGORIES.filter((c) => c.id !== "all").map((c) => `<li><a href="index.html?cat=${c.id}#menu">${c.name}</a></li>`).join("")}</ul>
         </div>
         <div>
           <h5>روابط</h5>
@@ -62,7 +62,7 @@ function renderChrome() {
         </div>
       </div>
       <div class="copy">
-        <span>© ${new Date().getFullYear()} وصلة. كل المقالات توصل طازجة.</span>
+        <span>© ${new Date().getFullYear()} وصلة</span>
         <span>مدونة مستقلة وغير تابعة لأي تطبيق توصيل.</span>
       </div>
     </div>
@@ -89,18 +89,16 @@ function renderChrome() {
 /* ---------- بطاقة مقال (فاتورة طلب) ---------- */
 function postCard(p, featured = false) {
   const c = catOf(p.cat);
-  const orderNo = "#" + (1000 + POSTS.indexOf(p) * 137).toString();
   return `
   <a class="post ${featured ? "featured" : ""}" href="article.html?id=${p.id}">
     <div class="post-cover ${p.bg}">
       <span class="emoji">${p.emoji}</span>
-      <span class="eta">⏱️ يوصلك خلال ${arNum(p.read)} دقائق</span>
     </div>
     <div class="post-body">
-      <span class="chip">${c.icon} ${c.name}</span>
+      <span class="chip">${c.name}</span>
       <h3>${p.title}</h3>
       <p>${p.excerpt}</p>
-      <div class="receipt"><span>طلب ${orderNo}</span><span>${fmtDate(p.date)}</span><b>اطلب ←</b></div>
+      <div class="receipt"><span>${fmtDate(p.date)}</span><span>${arNum(p.read)} دقائق قراءة</span></div>
     </div>
   </a>`;
 }
@@ -120,9 +118,6 @@ function initHome() {
   $("#ticker").innerHTML = t + t;
 
   // الأرقام
-  $("#statPosts").textContent = arNum(POSTS.length);
-  $("#statApps").textContent = arNum(APPS.length);
-  $("#statCats").textContent = arNum(CATEGORIES.length - 1);
 
   // المنيو (التصنيفات)
   const params = new URLSearchParams(location.search);
@@ -132,7 +127,7 @@ function initHome() {
   const tabs = $("#menuTabs");
   tabs.innerHTML = CATEGORIES.map((c) => {
     const n = c.id === "all" ? POSTS.length : POSTS.filter((p) => p.cat === c.id).length;
-    return `<button class="menu-tab" data-cat="${c.id}" role="tab">${c.icon} ${c.name} <span class="count">${arNum(n)}</span></button>`;
+    return `<button class="menu-tab" data-cat="${c.id}" role="tab">${c.name} <span class="count">${arNum(n)}</span></button>`;
   }).join("");
 
   function draw() {
@@ -277,7 +272,7 @@ function initNewsletter() {
     const email = $("#nlEmail").value.trim();
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     $("#nlMsg").textContent = ok
-      ? "📦 تم! أول شحنة توصلك الأحد الجاي."
+      ? "تم الاشتراك. أول عدد يوصلك الأحد الجاي."
       : "⚠️ تأكد من البريد الإلكتروني.";
     if (ok) form.reset();
   });

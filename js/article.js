@@ -9,12 +9,12 @@ function initArticle() {
 
   $("#articleHero").innerHTML = `
     <div class="cover ${post.bg}">${post.emoji}</div>
-    <a class="chip" href="index.html?cat=${cat.id}#menu">${cat.icon} ${cat.name}</a>
+    <a class="chip" href="index.html?cat=${cat.id}#menu">${cat.name}</a>
     <h1>${post.title}</h1>
     <div class="meta">
-      <span>✍️ ${post.author}</span>
-      <span>📅 ${fmtDate(post.date)}</span>
-      <span>⏱️ وقت التوصيل: ${arNum(post.read)} دقائق قراءة</span>
+      <span>${post.author}</span>
+      <span>${fmtDate(post.date)}</span>
+      <span>${arNum(post.read)} دقائق قراءة</span>
     </div>`;
 
   $("#articleBody").innerHTML = post.body;
