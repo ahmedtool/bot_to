@@ -28,7 +28,6 @@ function renderChrome() {
       <nav class="nav-links" id="navLinks">
         ${link("index.html", "الرئيسية", "home")}
         ${link("index.html#menu", "المقالات", "posts")}
-        ${link("index.html#tools", "أدوات", "tools")}
         ${link("apps.html", "دليل التطبيقات", "apps")}
         ${link("about.html", "عن وصلة", "about")}
       </nav>
@@ -55,8 +54,6 @@ function renderChrome() {
           <h5>روابط</h5>
           <ul>
             <li><a href="apps.html">دليل التطبيقات</a></li>
-            <li><a href="index.html#tools">حاسبة التوفير</a></li>
-            <li><a href="index.html#tools">اختبار أي تطبيق يناسبك</a></li>
             <li><a href="about.html">عن وصلة</a></li>
           </ul>
         </div>
@@ -152,8 +149,6 @@ function initHome() {
   draw();
 
   initHeroTrack();
-  initCalculator();
-  initQuiz();
   renderApps($("#appsPreview"), 4);
   initNewsletter();
 }
@@ -179,76 +174,6 @@ function initHeroTrack() {
     k = (k + 1) % plan.length;
     setTimeout(step, wait);
   })();
-}
-
-/* ---------- حاسبة التوفير ---------- */
-function initCalculator() {
-  const f = {
-    orders: $("#cOrders"), fee: $("#cFee"), service: $("#cService"), sub: $("#cSub"),
-  };
-  const out = (id, v) => ($(`output[for="${id}"]`).textContent = v);
-
-  function calc() {
-    const orders = +f.orders.value, fee = +f.fee.value, service = +f.service.value, sub = +f.sub.value;
-    out("cOrders", arNum(orders) + " طلب");
-    out("cFee", arNum(fee) + " ر.س");
-    out("cService", arNum(service) + " ر.س");
-    out("cSub", arNum(sub) + " ر.س");
-
-    const monthly = orders * (fee + service);
-    const withSub = sub + orders * service;
-    const save = monthly - withSub;
-    const breakEven = fee > 0 ? Math.ceil(sub / fee) : 0;
-
-    $("#rMonthly").textContent = arNum(monthly) + " ر.س";
-    $("#rYearly").textContent = arNum(monthly * 12) + " ر.س";
-    $("#rSave").textContent = (save > 0 ? arNum(save) : "٠") + " ر.س";
-    $("#rBreak").textContent = arNum(breakEven) + " طلبات";
-
-    $("#calcTip").innerHTML = save > 0
-      ? `✅ بمعدل طلباتك، الاشتراك الشهري <b>يوفّر عليك</b> تقريبًا ${arNum(save * 12)} ر.س في السنة.`
-      : `⚠️ بمعدل طلباتك الحالي، الاشتراك <b>ما يستاهل</b>. تحتاج ${arNum(breakEven)} طلبات شهريًا على الأقل.`;
-  }
-  Object.values(f).forEach((i) => i.addEventListener("input", calc));
-  calc();
-}
-
-/* ---------- الاختبار ---------- */
-function initQuiz() {
-  const box = $("#quiz");
-  let i = 0, score = {};
-
-  function show() {
-    if (i >= QUIZ.length) return result();
-    const q = QUIZ[i];
-    box.innerHTML = `
-      <div class="quiz-progress"><i style="width:${(i / QUIZ.length) * 100}%"></i></div>
-      <div class="quiz-q">${arNum(i + 1)}. ${q.q}</div>
-      <div class="quiz-opts">${q.opts.map((o, k) => `<button class="quiz-opt" data-k="${k}">${o.t}</button>`).join("")}</div>`;
-    $$(".quiz-opt", box).forEach((b) => b.addEventListener("click", () => {
-      const s = q.opts[+b.dataset.k].s;
-      for (const k in s) score[k] = (score[k] || 0) + s[k];
-      i++; show();
-    }));
-  }
-
-  function result() {
-    const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
-    const r = QUIZ_RESULTS[best];
-    box.innerHTML = `
-      <div class="quiz-progress"><i style="width:100%"></i></div>
-      <div class="quiz-result">
-        <div class="big">${r.emoji}</div>
-        <h4>${r.title}</h4>
-        <p>${r.text}</p>
-        <div class="hero-cta" style="justify-content:center">
-          <a class="btn btn-primary" href="article.html?id=${r.link}">اقرأ المقال المناسب لك</a>
-          <button class="btn btn-ghost" id="quizAgain">أعد الاختبار</button>
-        </div>
-      </div>`;
-    $("#quizAgain").addEventListener("click", () => { i = 0; score = {}; show(); });
-  }
-  show();
 }
 
 /* ---------- دليل التطبيقات ---------- */
