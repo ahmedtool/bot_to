@@ -24,25 +24,24 @@ function initArticle() {
   $("#toc").innerHTML = heads.map((h) => `<li><a href="#${h.id}">${h.textContent}</a></li>`).join("");
   const tocLinks = $$("#toc a");
 
-  // مراحل تتبع القراءة
-  const stages = [
-    [0, "📋 جاري تجهيز طلبك"],
-    [0.15, "👨‍🍳 المطبخ يحضّر المقال"],
-    [0.45, "🛵 المندوب في الطريق"],
-    [0.8, "📍 المندوب قريب منك"],
-    [0.98, "✅ تم التوصيل"],
-  ];
+  // تتبع القراءة كأنه تتبع طلب
   const body = $("#articleBody");
-  const fill = $("#trackFill"), scooter = $("#trackScooter"), text = $("#trackText");
+  const text = $("#trackText");
+  const statuses = ["تم استلام طلبك", "المطبخ يحضّر المقال", "المندوب في الطريق", "المندوب قريب منك", "تم التوصيل"];
   let delivered = false;
+  const tracker = createTracker($("#readTrack"), [
+    { at: 0, label: "الاستلام" },
+    { at: 0.25, label: "التحضير" },
+    { at: 0.5, label: "في الطريق" },
+    { at: 0.75, label: "قريب منك" },
+  ], (i) => swapText(text, statuses[i]));
 
   function onScroll() {
     const rect = body.getBoundingClientRect();
     // النسبة = كم من المقال مرّ فوق ٨٥٪ من ارتفاع الشاشة
     const p = Math.min(1, Math.max(0, (innerHeight * 0.85 - rect.top) / rect.height));
-    fill.style.width = p * 100 + "%";
-    scooter.style.insetInlineStart = `calc(${p * 100}% - 12px)`;
-    text.textContent = stages.filter((s) => p >= s[0]).pop()[1];
+    tracker.set(p);
+    if (p >= 0.99) swapText(text, statuses[4]);
 
     if (p >= 0.98 && !delivered) {
       delivered = true;

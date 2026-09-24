@@ -16,9 +16,9 @@
   <!-- متتبع القراءة على شكل تتبع طلب -->
   <div class="tracker" aria-hidden="true">
     <div class="container tracker-inner">
-      <div class="tracker-status"><span class="dot"></span><span id="trackText">جاري تجهيز طلبك</span></div>
-      <div class="tracker-bar"><div class="fill" id="trackFill"></div><span class="scooter" id="trackScooter">🛵</span></div>
-          </div>
+      <div class="tracker-status"><span class="dot"></span><span class="status-text" id="trackText">تم استلام طلبك</span></div>
+      <div id="readTrack"></div>
+    </div>
   </div>
 
   <main id="main">
@@ -63,6 +63,7 @@
   <div id="footer"></div>
 
   <script src="js/data.js"></script>
+  <script src="js/tracker.js"></script>
   <script src="js/main.js"></script>
   <script src="js/article.js"></script>
 </body>

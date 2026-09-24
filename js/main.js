@@ -151,31 +151,34 @@ function initHome() {
   $("#search").addEventListener("input", (e) => { query = e.target.value.trim(); draw(); });
   draw();
 
-  animateRider();
+  initHeroTrack();
   initCalculator();
   initQuiz();
   renderApps($("#appsPreview"), 4);
   initNewsletter();
 }
 
-/* ---------- المندوب يمشي على المسار في الهيرو ---------- */
-function animateRider() {
-  const path = $(".route-path"), rider = $(".rider"), map = $(".map");
-  if (!path || !rider) return;
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const len = path.getTotalLength();
-  const vb = { w: 380, h: 210 };
-  const start = performance.now(), dur = 6000;
-  function frame(now) {
-    const t = ((now - start) % (dur * 2)) / dur;
-    const k = t < 1 ? t : 2 - t;                    // ذهاب وعودة
-    const e = k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;  // ease-in-out
-    const pt = path.getPointAtLength(e * len);
-    const x = (pt.x / vb.w) * map.clientWidth, y = (pt.y / vb.h) * map.clientHeight;
-    rider.style.transform = `translate(${x}px, ${y}px)`;
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+/* ---------- تتبع طلب تلقائي في الهيرو ---------- */
+function initHeroTrack() {
+  const el = $("#heroTrack");
+  if (!el || typeof createTracker !== "function") return;
+  const text = $("#heroTrackText");
+  const statuses = ["تم استلام الفكرة", "التحرير والمراجعة", "المقال في الطريق", "قريب منك", "وصل المقال"];
+  const t = createTracker(el, [
+    { at: 0, label: "الفكرة" },
+    { at: 0.33, label: "التحرير" },
+    { at: 0.66, label: "في الطريق" },
+  ], (i) => swapText(text, statuses[i]));
+  // يتقدم على مراحل مع توقفات قصيرة، ثم يعيد من البداية
+  const plan = [0, 0.33, 0.5, 0.66, 0.85, 1];
+  let k = 0;
+  (function step() {
+    if (k === 0) t.jump(0); else t.set(plan[k]);
+    if (plan[k] === 1) setTimeout(() => swapText(text, statuses[4]), 700);
+    const wait = plan[k] === 1 ? 3200 : 1500;
+    k = (k + 1) % plan.length;
+    setTimeout(step, wait);
+  })();
 }
 
 /* ---------- حاسبة التوفير ---------- */
