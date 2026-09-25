@@ -3,89 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>أحمد الحربي — مدونة تطبيقات التوصيل</title>
-  <meta name="description" content="أحمد الحربي: مدونة عربية متخصصة في تطبيقات التوصيل — نصائح للتوفير، وأدلة للمناديب وأصحاب المطاعم." />
+  <title>أحمد الحربي</title>
+  <meta name="description" content="الموقع الشخصي لأحمد الحربي: نبذة، مهارات، أعمال، ومقالات." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-</head>
 <body data-page="home">
   <div id="header"></div>
 
   <main id="main">
-    <!-- الهيرو: المدونة كأنها طلب توصيل -->
-    <section class="hero">
+    <!-- الهيرو -->
+    <section class="hero pf-hero">
       <div class="container">
-        <div class="eyebrow">مدونة تطبيقات التوصيل</div>
-        <h1 class="hero-title">كل ما يخص التوصيل، بعمق.</h1>
+        <div class="eyebrow">مرحبًا، أنا</div>
+        <h1 class="hero-title" id="pfName"></h1>
+        <div class="pf-role" id="pfRole"></div>
         <div class="hero-sub">
-          <p>مقالات وأدلة عن تطبيقات التوصيل، للعميل اللي يبي يوفّر، والمندوب اللي يبي يكسب، وصاحب المطعم اللي يبي ينمو.</p>
+          <p id="pfIntro"></p>
           <div class="hero-cta">
-            <a href="#menu" class="btn btn-primary">اقرأ المقالات</a>
-            <a href="apps.html" class="btn btn-ghost">دليل التطبيقات</a>
+            <a href="#work" class="btn btn-primary">شاهد أعمالي</a>
+            <a href="#contact" class="btn btn-ghost">تواصل معي</a>
           </div>
         </div>
-        <div class="hero-track" aria-hidden="true">
-          <div class="hero-track-head">
-            <span class="status-text" id="heroTrackText">تم استلام الفكرة</span>
-            <small>مقال جديد في الطريق إليك</small>
-          </div>
-          <div id="heroTrack"></div>
+        <div class="facts" id="pfFacts"></div>
+      </div>
+    </section>
+
+    <!-- النبذة -->
+    <section id="about" class="reveal">
+      <div class="container split">
+        <div class="split-head"><div class="eyebrow">٠١</div><h2>نبذة عني</h2></div>
+        <div>
+          <div class="pf-about" id="pfAbout"></div>
+          <div class="stats" id="pfStats"></div>
         </div>
       </div>
     </section>
 
-    <div class="ticker" aria-label="نصائح سريعة"><div class="ticker-track" id="ticker"></div></div>
+    <!-- المهارات -->
+    <section id="skills" class="soft reveal">
+      <div class="container">
+        <div class="sec-head"><div><div class="eyebrow">٠٢</div><h2>مهاراتي</h2></div></div>
+        <div class="skills" id="pfSkills"></div>
+      </div>
+    </section>
+
+    <!-- الأعمال -->
+    <section id="work" class="reveal">
+      <div class="container">
+        <div class="sec-head"><div><div class="eyebrow">٠٣</div><h2>أعمالي</h2></div><p>مختارات من مشاريع اشتغلت عليها.</p></div>
+        <div class="projects" id="pfWork"></div>
+      </div>
+    </section>
+
+    <!-- الخبرات -->
+    <section id="experience" class="reveal">
+      <div class="container split">
+        <div class="split-head"><div class="eyebrow">٠٤</div><h2>الخبرات والتعليم</h2></div>
+        <ol class="timeline" id="pfExp"></ol>
+      </div>
+    </section>
 
     <!-- المقالات -->
-    <section id="menu">
+    <section id="articles" class="soft reveal">
       <div class="container">
         <div class="sec-head">
-          <div>
-            <div class="eyebrow">المنيو</div>
-            <h2>أحدث المقالات</h2>
-          </div>
-          <label class="search-box">
-            <input id="search" type="search" placeholder="ابحث في الطلبات…" aria-label="ابحث في المقالات" />
-          </label>
+          <div><div class="eyebrow">٠٥</div><h2>أحدث مقالاتي</h2></div>
+          <a href="blog.html" class="btn btn-ghost">كل المقالات ←</a>
         </div>
-        <div class="menu-tabs" id="menuTabs" role="tablist"></div>
-        <div class="posts" id="posts"></div>
+        <div class="posts" id="pfPosts"></div>
       </div>
     </section>
 
-    <!-- دليل التطبيقات -->
-    <section>
-      <div class="container">
-        <div class="sec-head">
-          <div>
-            <div class="eyebrow">دليل التطبيقات</div>
-            <h2>تعرّف على اللاعبين</h2>
-          </div>
-          <a href="apps.html" class="btn btn-ghost">الدليل كامل ←</a>
-        </div>
-        <div class="apps" id="appsPreview"></div>
-      </div>
-    </section>
-
-    <!-- النشرة -->
-    <section>
-      <div class="container">
-        <div class="newsletter">
-          <div>
-            <h2>النشرة الأسبوعية</h2>
-            <p>كل أحد: مقال جديد، أفضل نصيحة توفير، وخبر من عالم التوصيل.</p>
-          </div>
-          <div>
-            <form class="nl-form" id="nlForm" novalidate>
-              <input id="nlEmail" type="email" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" />
-              <button class="btn btn-primary" type="submit">اشترك</button>
-            </form>
-            <div class="nl-msg" id="nlMsg" aria-live="polite"></div>
-          </div>
-        </div>
+    <!-- التواصل -->
+    <section id="contact" class="reveal">
+      <div class="container contact">
+        <div class="eyebrow">٠٦ · تواصل معي</div>
+        <h2>عندك فكرة مشروع؟<br />خلنا نتكلم.</h2>
+        <a class="contact-email" id="pfEmail" href="#"></a>
+        <div class="contact-links" id="pfLinks"></div>
       </div>
     </section>
   </main>
@@ -93,7 +91,6 @@
   <div id="footer"></div>
 
   <script src="js/data.js"></script>
-  <script src="js/tracker.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

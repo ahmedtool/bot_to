@@ -271,3 +271,61 @@ table.compare { width: 100%; border-collapse: collapse; min-width: 640px; }
 .term { padding: 24px 0; border-bottom: 1px solid var(--line); }
 .term b { display: block; font-size: 1.15rem; margin-bottom: 4px; }
 .term span { font-size: .95rem; color: var(--ink-soft); }
+
+/* ============================================
+   الصفحة التعريفية
+   ============================================ */
+.pf-hero { padding: 80px 0 56px; }
+.pf-role { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 600; color: var(--muted); margin-top: 8px; }
+.facts { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .95rem; }
+.avail { display: inline-flex; align-items: center; gap: 8px; }
+.avail i { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 var(--good); animation: ring 2s infinite; }
+@keyframes ring { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+.split { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+.split-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; gap: 20px; } }
+.pf-about p { font-size: 1.2rem; color: var(--ink-soft); margin-bottom: 18px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 32px; border-top: 1px solid var(--line); }
+.stats div { padding: 20px 0; }
+.stats b { display: block; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; }
+.stats span { color: var(--muted); font-size: .9rem; }
+
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+@media (max-width: 860px) { .skills { grid-template-columns: 1fr; gap: 8px; } }
+.skill-group { padding-top: 8px; }
+.skill-group .num { color: var(--muted); font-size: .85rem; font-weight: 600; }
+.skill-group h3 { font-size: 1.3rem; margin: 4px 0 12px; }
+.skill-group ul { list-style: none; }
+.skill-group li { padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 32px; }
+@media (max-width: 760px) { .projects { grid-template-columns: 1fr; gap: 36px; } }
+.project { display: flex; flex-direction: column; gap: 16px; }
+.project-cover { aspect-ratio: 16/10; border-radius: 6px; display: grid; place-items: center; color: #fff; overflow: hidden; }
+.project-cover span { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 700; opacity: .9; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.project:hover .project-cover span { transform: scale(1.08) translateY(-4px); }
+.project-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.project-top h3 { font-size: 1.35rem; }
+.project:hover h3 { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.project .year { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+.project p { color: var(--ink-soft); margin: 6px 0 12px; }
+.project .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.timeline { list-style: none; border-top: 1px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.timeline .period { color: var(--muted); font-size: .95rem; padding-top: 3px; }
+.timeline h3 { font-size: 1.2rem; }
+.timeline h3 small { font-weight: 500; color: var(--muted); font-size: 1rem; }
+.timeline p { color: var(--ink-soft); margin-top: 4px; }
+@media (max-width: 560px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+.contact { text-align: start; padding-block: 24px 16px; }
+.contact h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); line-height: 1.2; letter-spacing: -0.03em; margin: 8px 0 28px; }
+.contact-email { display: inline-block; font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 600; border-bottom: 2px solid var(--ink); padding-bottom: 2px; direction: ltr; unicode-bidi: isolate; transition: opacity .2s; word-break: break-all; }
+.contact-email:hover { opacity: .6; }
+.contact-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }

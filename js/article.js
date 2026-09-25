@@ -5,11 +5,11 @@ function initArticle() {
   const post = POSTS.find((p) => p.id === id) || POSTS[0];
   const cat = catOf(post.cat);
 
-  document.title = `${post.title} — أحمد الحربي`;
+  document.title = `${post.title} — ${PROFILE.name}`;
 
   $("#articleHero").innerHTML = `
     <div class="cover ${post.bg}">${post.emoji}</div>
-    <a class="chip" href="index.html?cat=${cat.id}#menu">${cat.name}</a>
+    <a class="chip" href="blog.html?cat=${cat.id}#menu">${cat.name}</a>
     <h1>${post.title}</h1>
     <div class="meta">
       <span>${post.author}</span>
