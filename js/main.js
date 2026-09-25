@@ -1,4 +1,4 @@
-/* وصلة — السكربت المشترك لكل الصفحات */
+/* المدونة — السكربت المشترك لكل الصفحات */
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -21,15 +21,15 @@ function renderChrome() {
   <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
   <header class="site-header">
     <div class="container nav">
-      <a href="index.html" class="logo" aria-label="وصلة - الرئيسية">
-        <span class="logo-mark">و</span>
-        <span>وصلة</span>
+      <a href="index.html" class="logo" aria-label="أحمد الحربي - الرئيسية">
+        <span class="logo-mark">أ</span>
+        <span>أحمد الحربي<small>مدونة عن تطبيقات التوصيل</small></span>
       </a>
       <nav class="nav-links" id="navLinks">
         ${link("index.html", "الرئيسية", "home")}
         ${link("index.html#menu", "المقالات", "posts")}
         ${link("apps.html", "دليل التطبيقات", "apps")}
-        ${link("about.html", "عن وصلة", "about")}
+        ${link("about.html", "عن المدونة", "about")}
       </nav>
       <div class="nav-actions">
         <button class="icon-btn" id="themeBtn" aria-label="تبديل الوضع الليلي">🌙</button>
@@ -43,7 +43,7 @@ function renderChrome() {
     <div class="container">
       <div class="foot-grid">
         <div>
-          <a href="index.html" class="logo"><span class="logo-mark">و</span><span>وصلة</span></a>
+          <a href="index.html" class="logo"><span class="logo-mark">أ</span><span>أحمد الحربي</span></a>
           <p style="margin-top:12px;max-width:380px">مدونة مستقلة عن عالم تطبيقات التوصيل: نكتب للعميل الذي يريد أن يوفّر، وللمندوب الذي يريد أن يكسب، ولصاحب المطعم الذي يريد أن ينمو.</p>
         </div>
         <div>
@@ -54,12 +54,12 @@ function renderChrome() {
           <h5>روابط</h5>
           <ul>
             <li><a href="apps.html">دليل التطبيقات</a></li>
-            <li><a href="about.html">عن وصلة</a></li>
+            <li><a href="about.html">عن المدونة</a></li>
           </ul>
         </div>
       </div>
       <div class="copy">
-        <span>© ${new Date().getFullYear()} وصلة</span>
+        <span>© ${new Date().getFullYear()} أحمد الحربي</span>
         <span>مدونة مستقلة وغير تابعة لأي تطبيق توصيل.</span>
       </div>
     </div>

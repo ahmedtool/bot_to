@@ -5,7 +5,7 @@ function initArticle() {
   const post = POSTS.find((p) => p.id === id) || POSTS[0];
   const cat = catOf(post.cat);
 
-  document.title = `${post.title} — وصلة`;
+  document.title = `${post.title} — أحمد الحربي`;
 
   $("#articleHero").innerHTML = `
     <div class="cover ${post.bg}">${post.emoji}</div>
