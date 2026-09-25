@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>أحمد الحربي</title>
-  <meta name="description" content="الموقع الشخصي لأحمد الحربي: نبذة، مهارات، أعمال، ومقالات." />
+  <title>أحمد الحربي — Ahmed Alharbi</title>
+  <meta name="description" content="أحمد الحربي: إدارة أعمال، تشغيل صحي، ومنتجات رقمية. مؤسس منصة مرشح." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,13 +17,16 @@
     <!-- الهيرو -->
     <section class="hero pf-hero">
       <div class="container">
-        <div class="eyebrow">مرحبًا، أنا</div>
+        <div class="eyebrow name-en" id="pfNameEn"></div>
         <h1 class="hero-title" id="pfName"></h1>
         <div class="pf-role" id="pfRole"></div>
         <div class="hero-sub">
-          <p id="pfIntro"></p>
+          <div>
+            <p id="pfIntro"></p>
+            <p class="intro-en" id="pfIntroEn" lang="en" dir="ltr"></p>
+          </div>
           <div class="hero-cta">
-            <a href="#work" class="btn btn-primary">شاهد أعمالي</a>
+            <a href="#work" class="btn btn-primary">وش أبني</a>
             <a href="#contact" class="btn btn-ghost">تواصل معي</a>
           </div>
         </div>
@@ -31,38 +34,42 @@
       </div>
     </section>
 
-    <!-- النبذة -->
-    <section id="about" class="reveal">
-      <div class="container split">
-        <div class="split-head"><div class="eyebrow">٠١</div><h2>نبذة عني</h2></div>
-        <div>
-          <div class="pf-about" id="pfAbout"></div>
-          <div class="stats" id="pfStats"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- المهارات -->
-    <section id="skills" class="soft reveal">
-      <div class="container">
-        <div class="sec-head"><div><div class="eyebrow">٠٢</div><h2>مهاراتي</h2></div></div>
-        <div class="skills" id="pfSkills"></div>
-      </div>
-    </section>
-
     <!-- الأعمال -->
     <section id="work" class="reveal">
       <div class="container">
-        <div class="sec-head"><div><div class="eyebrow">٠٣</div><h2>أعمالي</h2></div><p>مختارات من مشاريع اشتغلت عليها.</p></div>
+        <div class="sec-head"><div><div class="eyebrow">٠١ · What I Build</div><h2>وش أبني</h2></div><p>منتجات بنيتها وأطلقتها.</p></div>
         <div class="projects" id="pfWork"></div>
+      </div>
+    </section>
+
+    <!-- النبذة والإنجازات -->
+    <section id="about" class="soft reveal">
+      <div class="container split">
+        <div class="split-head"><div class="eyebrow">٠٢</div><h2>نبذة عني</h2></div>
+        <div>
+          <div class="pf-about" id="pfAbout"></div>
+          <div class="stats" id="pfAchievements"></div>
+        </div>
       </div>
     </section>
 
     <!-- الخبرات -->
     <section id="experience" class="reveal">
       <div class="container split">
-        <div class="split-head"><div class="eyebrow">٠٤</div><h2>الخبرات والتعليم</h2></div>
+        <div class="split-head"><div class="eyebrow">٠٣</div><h2>الخبرات والتعليم</h2></div>
         <ol class="timeline" id="pfExp"></ol>
+      </div>
+    </section>
+
+    <!-- المهارات -->
+    <section id="skills" class="soft reveal">
+      <div class="container">
+        <div class="sec-head"><div><div class="eyebrow">٠٤</div><h2>مهاراتي</h2></div></div>
+        <div class="skills" id="pfSkills"></div>
+        <div class="extras">
+          <div><h3>اللغات</h3><ul class="langs" id="pfLangs"></ul></div>
+          <div><h3>اهتماماتي</h3><div class="interests" id="pfInterests"></div></div>
+        </div>
       </div>
     </section>
 
@@ -70,7 +77,7 @@
     <section id="contact" class="reveal">
       <div class="container contact">
         <div class="eyebrow">٠٥ · تواصل معي</div>
-        <h2>عندك فكرة مشروع؟<br />خلنا نتكلم.</h2>
+        <h2>عندك فكرة أو فرصة؟<br />خلنا نتكلم.</h2>
         <a class="contact-email" id="pfEmail" href="#"></a>
         <div class="contact-links" id="pfLinks"></div>
       </div>

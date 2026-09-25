@@ -21,11 +21,13 @@ function renderChrome() {
     <div class="container nav">
       <a href="index.html" class="logo" aria-label="أحمد الحربي - الرئيسية">
         <span class="logo-mark">أ</span>
-        <span>${PROFILE.name}<small>${PROFILE.role}</small></span>
+        <span>${PROFILE.name}<small lang="en">${PROFILE.nameEn}</small></span>
       </a>
       <nav class="nav-links" id="navLinks">
         ${link("index.html", "الرئيسية", "home")}
-        ${link("index.html#work", "أعمالي", "work")}
+        ${link("index.html#work", "وش أبني", "work")}
+        ${link("index.html#about", "نبذة", "about")}
+        ${link("index.html#experience", "خبراتي", "experience")}
         ${link("index.html#skills", "مهاراتي", "skills")}
         ${link("index.html#contact", "تواصل معي", "contact")}
       </nav>
@@ -48,7 +50,8 @@ function renderChrome() {
           <h5>روابط</h5>
           <ul>
             <li><a href="index.html#about">نبذة عني</a></li>
-            <li><a href="index.html#work">أعمالي</a></li>
+            <li><a href="index.html#work">وش أبني</a></li>
+            <li><a href="index.html#experience">خبراتي</a></li>
             <li><a href="index.html#skills">مهاراتي</a></li>
             <li><a href="index.html#contact">تواصل معي</a></li>
             ${PROFILE.contact.links.map((l) => `<li><a href="${l.url}" target="_blank" rel="noopener">${l.label}</a></li>`).join("")}
@@ -82,15 +85,43 @@ function renderChrome() {
 /* ---------- الصفحة التعريفية ---------- */
 function initPortfolio() {
   const P = PROFILE;
+  $("#pfNameEn").textContent = P.nameEn;
   $("#pfName").textContent = P.name;
   $("#pfRole").textContent = P.role;
   $("#pfIntro").textContent = P.intro;
+  $("#pfIntroEn").textContent = P.introEn;
   $("#pfFacts").innerHTML = `
+    <span>${P.fullName}</span>
     <span>📍 ${P.city}</span>
-    ${P.available ? `<span class="avail"><i></i> متاح لمشاريع جديدة</span>` : ""}`;
+    ${P.available ? `<span class="avail"><i></i> متاح للتعاون</span>` : ""}`;
+
+  $("#pfWork").innerHTML = P.projects.map((p, i) => `
+    <article class="project ${i === 0 ? "lead" : ""}">
+      <div class="project-cover ${p.bg}">
+        <span class="cover-ar">${p.title}</span>
+        <span class="cover-en" lang="en">${p.titleEn}</span>
+      </div>
+      <div class="project-body">
+        <span class="chip">${p.label}</span>
+        <h3>${p.title} <small lang="en">${p.titleEn}</small></h3>
+        <p>${p.desc}</p>
+        <ul class="points">${p.points.map((x) => `<li>${x}</li>`).join("")}</ul>
+        <div class="tags">${p.tags.map((t) => `<span class="chip sky">${t}</span>`).join("")}</div>
+        ${p.link ? `<a class="btn btn-ghost" href="${p.link}" target="_blank" rel="noopener">زيارة الموقع ↗</a>` : ""}
+      </div>
+    </article>`).join("");
 
   $("#pfAbout").innerHTML = P.about.map((t) => `<p>${t}</p>`).join("");
-  $("#pfStats").innerHTML = P.stats.map((s) => `<div><b>${s.value}</b><span>${s.label}</span></div>`).join("");
+  $("#pfAchievements").innerHTML = P.achievements.map((s) => `<div><b>${s.value}</b><span>${s.label}</span></div>`).join("");
+
+  $("#pfExp").innerHTML = P.experience.map((e) => `
+    <li>
+      <span class="period">${e.period}</span>
+      <div>
+        <h3>${e.title}${e.place ? ` <small>· ${e.place}</small>` : ""}</h3>
+        ${e.points.length ? `<ul>${e.points.map((x) => `<li>${x}</li>`).join("")}</ul>` : ""}
+      </div>
+    </li>`).join("");
 
   $("#pfSkills").innerHTML = P.skills.map((g, i) => `
     <div class="skill-group">
@@ -98,23 +129,8 @@ function initPortfolio() {
       <h3>${g.group}</h3>
       <ul>${g.items.map((x) => `<li>${x}</li>`).join("")}</ul>
     </div>`).join("");
-
-  $("#pfWork").innerHTML = P.projects.map((p, i) => `
-    <a class="project" href="${p.link}">
-      <div class="project-cover ${p.bg}"><span>${arNum(i + 1).padStart(2, "٠")}</span></div>
-      <div class="project-body">
-        <div class="project-top"><h3>${p.title}</h3><span class="year">${p.year}</span></div>
-        <p>${p.desc}</p>
-        <div class="tags">${p.tags.map((t) => `<span class="chip sky">${t}</span>`).join("")}</div>
-      </div>
-    </a>`).join("");
-
-  $("#pfExp").innerHTML = P.experience.map((e) => `
-    <li>
-      <span class="period">${e.period}</span>
-      <div><h3>${e.title} <small>· ${e.place}</small></h3><p>${e.desc}</p></div>
-    </li>`).join("");
-
+  $("#pfLangs").innerHTML = P.languages.map((l) => `<li><b>${l.name}</b><span>${l.level}</span></li>`).join("");
+  $("#pfInterests").innerHTML = P.interests.map((x) => `<span class="pill">${x}</span>`).join("");
 
   $("#pfEmail").textContent = P.contact.email;
   $("#pfEmail").href = "mailto:" + P.contact.email;
