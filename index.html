@@ -12,15 +12,16 @@
   <link rel="stylesheet" href="css/style.css" />
 <body data-page="home">
   <div id="header"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <main id="main">
     <!-- الهيرو -->
     <section class="hero pf-hero">
       <div class="container">
-        <div class="eyebrow name-en" id="pfNameEn"></div>
+        <div class="eyebrow name-en intro-anim" style="--d:0" id="pfNameEn"></div>
         <h1 class="hero-title" id="pfName"></h1>
-        <div class="pf-role" id="pfRole"></div>
-        <div class="hero-sub">
+        <div class="pf-role intro-anim" style="--d:5" id="pfRole"></div>
+        <div class="hero-sub intro-anim" style="--d:7">
           <div>
             <p id="pfIntro"></p>
             <p class="intro-en" id="pfIntroEn" lang="en" dir="ltr"></p>
@@ -30,9 +31,12 @@
             <a href="#contact" class="btn btn-ghost">تواصل معي</a>
           </div>
         </div>
-        <div class="facts" id="pfFacts"></div>
+        <div class="facts intro-anim" style="--d:9" id="pfFacts"></div>
       </div>
     </section>
+
+    <!-- شريط الاهتمامات المتحرك -->
+    <div class="marquee" aria-hidden="true"><div class="marquee-track" id="pfMarquee"></div></div>
 
     <!-- الأعمال -->
     <section id="work" class="reveal">

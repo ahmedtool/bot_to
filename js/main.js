@@ -86,7 +86,9 @@ function renderChrome() {
 function initPortfolio() {
   const P = PROFILE;
   $("#pfNameEn").textContent = P.nameEn;
-  $("#pfName").textContent = P.name;
+  // الاسم: كل كلمة تطلع من تحت قناع
+  $("#pfName").innerHTML = P.name.split(" ").map((w, i) =>
+    `<span class="w"><span style="--d:${i + 1}">${w}</span></span>`).join(" ");
   $("#pfRole").textContent = P.role;
   $("#pfIntro").textContent = P.intro;
   $("#pfIntroEn").textContent = P.introEn;
@@ -136,15 +138,40 @@ function initPortfolio() {
   $("#pfEmail").href = "mailto:" + P.contact.email;
   $("#pfLinks").innerHTML = P.contact.links.map((l) => `<a class="btn btn-ghost" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join("");
 
-  // ظهور تدريجي للأقسام أثناء التمرير
+  // شريط الاهتمامات المتحرك (مكرر ليدور بلا انقطاع)
+  const words = [...P.interests, ...P.skills.flatMap((g) => g.group)];
+  const row = words.map((w) => `<span>${w}</span>`).join("");
+  $("#pfMarquee").innerHTML = row + row;
+
+  // ترتيب ظهور العناصر داخل كل قسم
+  const groups = ["#pfWork", "#pfAchievements", "#pfExp", "#pfSkills", "#pfLangs", "#pfInterests", "#pfLinks"];
+  groups.forEach((g) => [...$(g).children].forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i); }));
+  $$(".skill-group li, .points li, .timeline ul li").forEach((el) => {
+    el.classList.add("st");
+    el.style.setProperty("--i", [...el.parentNode.children].indexOf(el) + 2);
+  });
+
+  // ظهور تدريجي أثناء التمرير
+  const targets = $$(".reveal, .project");
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-    }), { threshold: 0.12 });
-    $$(".reveal").forEach((el) => io.observe(el));
+    }), { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    targets.forEach((el) => io.observe(el));
   } else {
-    $$(".reveal").forEach((el) => el.classList.add("in"));
+    targets.forEach((el) => el.classList.add("in"));
   }
+
+  // شريط تقدم التمرير أعلى الصفحة
+  const bar = $("#progress");
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  requestAnimationFrame(() => document.body.classList.add("loaded"));
 }
 
 document.addEventListener("DOMContentLoaded", () => {

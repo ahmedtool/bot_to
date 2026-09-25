@@ -201,6 +201,79 @@ section { padding: 64px 0; }
 .contact-email:hover { opacity: .6; }
 .contact-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
-.reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+
+/* ============================================
+   الأنيميشن
+   ============================================ */
+:root { --ease: cubic-bezier(.2, .7, .2, 1); }
+
+/* شريط التقدم */
+.progress { position: fixed; top: 0; inset-inline: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: right; z-index: 60; }
+
+/* دخول الهيرو */
+.w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; }
+.w > span { display: inline-block; transform: translateY(110%); }
+.loaded .w > span { transform: none; transition: transform 1.1s var(--ease) calc(var(--d) * 120ms); }
+.intro-anim { opacity: 0; transform: translateY(18px); }
+.loaded .intro-anim { opacity: 1; transform: none; transition: opacity .9s ease calc(var(--d) * 90ms), transform .9s var(--ease) calc(var(--d) * 90ms); }
+.facts { position: relative; border-top-color: transparent; }
+.facts::before { content: ""; position: absolute; top: -1px; inset-inline: 0; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: right; }
+.loaded .facts::before { transform: none; transition: transform 1.4s var(--ease) .9s; }
+
+/* شريط الكلمات المتحرك */
+.marquee { border-block: 1px solid var(--line); overflow: hidden; padding: 18px 0; }
+.marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 45s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span { font-size: clamp(1.1rem, 2.4vw, 1.6rem); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.marquee-track span::after { content: "✦"; margin-inline-start: 48px; font-size: .7em; color: var(--muted); vertical-align: middle; }
+@keyframes marquee { to { transform: translateX(50%); } }
+
+/* الأقسام */
+.reveal .sec-head, .reveal .split-head, .reveal .pf-about, .reveal .contact > * { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s var(--ease); }
+.reveal.in .sec-head, .reveal.in .split-head, .reveal.in .pf-about, .reveal.in .contact > * { opacity: 1; transform: none; }
+.reveal.in .pf-about { transition-delay: .15s; }
+.reveal.in .contact > :nth-child(2) { transition-delay: .1s; }
+.reveal.in .contact > :nth-child(3) { transition-delay: .2s; }
+.sec-head { border-bottom: 0; position: relative; }
+.sec-head::after { content: ""; position: absolute; bottom: 0; inset-inline: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: right; transition: transform 1.2s var(--ease) .2s; }
+.reveal.in .sec-head::after { transform: none; }
+
+/* عناصر تظهر بالتتابع */
+.st { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s var(--ease); transition-delay: calc(var(--i) * 70ms + .15s); }
+.in .st, .in.st { opacity: 1; transform: none; }
+
+/* المشاريع: الغلاف ينفتح من الأسفل والاسم يستقر */
+.project.st { opacity: 1; transform: none; }
+.project-cover { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease); }
+.project.in .project-cover { clip-path: inset(0 0 0 0); }
+.project-cover .cover-ar, .project-cover .cover-en { transform: scale(1.15); opacity: 0; transition: transform 1.4s var(--ease) .25s, opacity 1s ease .25s; }
+.project.in .cover-ar, .project.in .cover-en { transform: none; opacity: 1; }
+.project.in:hover .cover-ar { transform: scale(1.05); transition-delay: 0s; }
+.project-body > * { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s var(--ease); }
+.project.in .project-body > * { opacity: 1; transform: none; }
+.project.in .project-body > :nth-child(2) { transition-delay: .35s; }
+.project.in .project-body > :nth-child(3) { transition-delay: .45s; }
+.project.in .project-body > :nth-child(n+4) { transition-delay: .55s; }
+.project.in .project-body > :first-child { transition-delay: .25s; }
+
+/* تفاعلات صغيرة */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn-ghost:hover { background: transparent; color: var(--bg); }
+.btn-ghost::before { content: ""; position: absolute; inset: 0; background: var(--ink); transform: translateY(101%); transition: transform .45s var(--ease); z-index: -1; }
+.btn-ghost:hover::before { transform: none; }
+.pill { transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease); }
+.pill:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); transform: translateY(-2px); }
+.skill-group li { transition: padding .3s var(--ease), color .3s; }
+.skill-group li:hover { padding-inline-start: 10px; color: var(--ink); }
+.contact-email { background: linear-gradient(var(--ink), var(--ink)) no-repeat right bottom / 0 2px; border-bottom-color: var(--line); transition: background-size .5s var(--ease); }
+.contact-email:hover { background-size: 100% 2px; opacity: 1; }
+
+/* تقليل الحركة: كل شيء يظهر مباشرة */
+@media (prefers-reduced-motion: reduce) {
+  .w > span, .intro-anim, .st, .project-body > *, .project-cover .cover-ar, .project-cover .cover-en,
+  .reveal .sec-head, .reveal .split-head, .reveal .pf-about, .reveal .contact > * { opacity: 1 !important; transform: none !important; }
+  .project-cover { clip-path: none !important; }
+  .sec-head::after, .facts::before { transform: none !important; }
+  .progress { display: none; }
+}
