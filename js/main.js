@@ -171,7 +171,18 @@ function initPortfolio() {
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  requestAnimationFrame(() => document.body.classList.add("loaded"));
+  // الشاشة الافتتاحية مرة وحدة في كل زيارة، بعدها تبدأ حركة الواجهة
+  const intro = $("#intro");
+  let seen = false;
+  try { seen = sessionStorage.getItem("intro-seen") === "1"; sessionStorage.setItem("intro-seen", "1"); } catch (e) {}
+  if (seen || !intro || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (intro) intro.remove();
+    requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add("loaded")));
+  } else {
+    requestAnimationFrame(() => intro.classList.add("play"));
+    setTimeout(() => { intro.classList.add("lift"); document.body.classList.add("loaded"); }, 1500);
+    setTimeout(() => intro.remove(), 2600);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
